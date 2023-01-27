@@ -84,15 +84,16 @@ contract ERC20 is IERC20 {
      */
     function transfer(address to, uint256 amount)public virtual override returns(bool)
     {
-        
-        require(to != address(0), "ERC20: transfer to the zero address");
+            /**
+     logic below is required 
+     */
+        require(to != address(0), "transfer to the 0 address");
         require(
             _balances[msg.sender] >= amount,
             "ERC20: transfer amount exceeds balance"
         );
         _balances[msg.sender] -= amount;
         _balances[to] += amount;
-        emit Transfer(msg.sender, to, amount);
         return true;
     }
 
@@ -217,11 +218,14 @@ contract ERC20 is IERC20 {
      * - `from` must have a balance of at least `amount`.
      */
     function _transfer( address from, address to, uint256 amount ) internal virtual {
-        
+        /**
+     logic below is required 
+     */
         require(from != address(0), "Transfer from 0 address ");
         require(to != address(0), "Transfer to 0 address");
         require(from.balance >= amount, "not enough balance.");
         _balances[to] += amount;
+       
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
@@ -293,7 +297,9 @@ contract ERC20 is IERC20 {
     function _approve(address owner, address spender, uint256 amount) internal virtual {
         require(owner != address(0), "ERC20: approve from the zero address");
         require(spender != address(0), "ERC20: approve to the zero address");
-
+    /**
+     logic below is required 
+     */
         _allowances[owner][spender] = amount;
         emit Approval(owner, spender, amount);
     }
